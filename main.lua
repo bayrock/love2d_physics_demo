@@ -45,6 +45,7 @@ function love.keyreleased( key, unicode )
 end
 
 function love.mousepressed( x, y, button )
+	addBall()
 end
 
 function love.mousereleased( x, y, button )

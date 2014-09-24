@@ -4,6 +4,7 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 debug = 0
+
 game = {}
 
 function game.load() -- Loads or reloads the demo
@@ -11,17 +12,14 @@ function game.load() -- Loads or reloads the demo
 	world = love.physics.newWorld(0, 9.81 * 64, true)
 
 	objects = {}
-
-	objects.ball = {} -- Loads the physics arguments for the ball
-	objects.ball.body = love.physics.newBody(world, windowWidth/2, windowHeight/2, "dynamic")
-	objects.ball.shape = love.physics.newCircleShape(20)
-	objects.ball.fixture = love.physics.newFixture(objects.ball.body, objects.ball.shape, 1)
-	objects.ball.fixture:setRestitution(0.9)
+	objects.ball = {} -- Stores the ball objects
+	curBalls = 1
 
 	objects.square = {} -- Loads the physic arguments for the square
 	objects.square.body = love.physics.newBody(world, 200, windowHeight/2, "dynamic")
 	objects.square.shape = love.physics.newRectangleShape(25, 25, 50, 50)
 	objects.square.fixture = love.physics.newFixture(objects.square.body, objects.square.shape)
+	objects.square.fixture:setRestitution(0.15)
 
 	objects.ground = {} -- Loads the physic arguments for the ground
 	objects.ground.body = love.physics.newBody(world, 0, windowHeightB)
@@ -46,13 +44,13 @@ end
 
 function game.controls() -- Controls the object
 	if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-		objects.ball.body:applyForce(0, -400)
+		objects.square.body:applyForce(0, -500)
 	elseif love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-		objects.ball.body:applyForce(0, 400)
+		objects.square.body:applyForce(0, 500)
 	elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
-		objects.ball.body:applyForce(-400, 0)
+		objects.square.body:applyForce(-500, 0)
 	elseif love.keyboard.isDown("d") or love.keyboard.isDown("right") then
-		objects.ball.body:applyForce(400, 0)
+		objects.square.body:applyForce(500, 0)
 	end
 end
 
@@ -64,15 +62,29 @@ function game.draw()
 	love.graphics.rectangle("fill", objects.rightWall.body:getX(), objects.rightWall.body:getY(), wallWidth, windowHeightB)
 
 	love.graphics.setColor(2, 132, 130) -- Draw the ball
-	love.graphics.circle("fill", objects.ball.body:getX(), objects.ball.body:getY(), objects.ball.shape:getRadius())
+	for q = 1, #objects.ball do
+		love.graphics.circle("fill", objects.ball[q].body:getX(), objects.ball[q].body:getY(), objects.ball[q].shape:getRadius())
+	end
 
 	love.graphics.setColor(150, 220, 170) -- Draw the square
 	love.graphics.rectangle("fill", objects.square.body:getX(), objects.square.body:getY(), 50, 50)
 
 	if debug == 1 then -- Draw debug variables
-		love.graphics.print(projectName..tostring(version), 25, 25) -- Display version
-		love.graphics.print("FPS: "..tostring(love.timer.getFPS( )), 25, 40) -- Display FPS
+		love.graphics.print(projectName..tostring(version), 30, 30) -- Display version
+		love.graphics.print("FPS: "..tostring(love.timer.getFPS( )),30, 45) -- Display FPS
+		love.graphics.print("Balls spawned: "..tostring(#objects.ball), 30, 60) -- Display number of ball objects on screen
 	end
+end
+
+function addBall() -- Adds a ball object
+	local mX, mY = love.mouse.getPosition()
+	objects.ball[curBalls] = {}
+
+	objects.ball[curBalls].body = love.physics.newBody(world, mX, mY, "dynamic")
+	objects.ball[curBalls].shape = love.physics.newCircleShape(20)
+	objects.ball[curBalls].fixture = love.physics.newFixture(objects.ball[curBalls].body, objects.ball[curBalls].shape, 1)
+	objects.ball[curBalls].fixture:setRestitution(0.9)
+	curBalls = curBalls + 1
 end
 
 function UPDATE_GAME(dt)
