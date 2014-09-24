@@ -13,7 +13,7 @@ Start of LOVE engine functions
 function love.load()
 	game.load() -- Player loading
 	love.graphics.setBackgroundColor(255, 255, 255)
-	print("Loaded Project Physics "..tostring(version))
+	print("Loaded "..tostring(projectName)..tostring(version))
 end
 
 function love.draw()
@@ -37,6 +37,10 @@ function love.keyreleased( key, unicode )
 		debug = 1
 	elseif key == "`" and debug == 1 then
 		debug = 0
+	end
+
+	if key == "r" then
+		game.load()
 	end
 end
 

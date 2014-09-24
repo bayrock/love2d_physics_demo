@@ -3,15 +3,21 @@ conf.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-version = "v0.2"
+projectName = "Lua Physics Demo "
+version = "v0.3"
+
+wallWidth = 25
+windowWidth = 800
+windowHeight = 600
+windowHeightB = windowHeight - wallWidth
 
 function love.conf(t)
     t.version = "0.9.1"
     t.console = true
-    t.window.title = "Project Physics - build: "..tostring(version)
+    t.window.title = projectName ..tostring("- build: ")..tostring(version)
     t.window.icon = nil
-    t.window.width = 800
-    t.window.height = 600
+    t.window.width = windowWidth
+    t.window.height = windowHeight
     t.window.borderless = false
     t.window.resizable = false
     t.window.minwidth = 1
