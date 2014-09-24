@@ -61,7 +61,7 @@ function game.draw()
 	love.graphics.rectangle("fill", objects.leftWall.body:getX(), objects.leftWall.body:getY(), wallWidth, windowHeightB)
 	love.graphics.rectangle("fill", objects.rightWall.body:getX(), objects.rightWall.body:getY(), wallWidth, windowHeightB)
 
-	love.graphics.setColor(2, 132, 130) -- Draw the ball
+	love.graphics.setColor(2, 132, 130) -- Draw the balls
 	for q = 1, #objects.ball do
 		love.graphics.circle("fill", objects.ball[q].body:getX(), objects.ball[q].body:getY(), objects.ball[q].shape:getRadius())
 	end
@@ -85,6 +85,14 @@ function addBall() -- Adds a ball object
 	objects.ball[curBalls].fixture = love.physics.newFixture(objects.ball[curBalls].body, objects.ball[curBalls].shape, 1)
 	objects.ball[curBalls].fixture:setRestitution(0.9)
 	curBalls = curBalls + 1
+end
+
+function removeBalls()
+	for b = #objects.ball, 1, -1 do
+		objects.ball[b].body:destroy()
+		table.remove(objects.ball, b)
+	end
+	curBalls = 1
 end
 
 function UPDATE_GAME(dt)

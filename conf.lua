@@ -4,7 +4,7 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 projectName = "Lua Physics Demo "
-version = "v0.4"
+version = "v0.5"
 
 wallWidth = 25
 windowWidth = 800
