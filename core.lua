@@ -54,7 +54,7 @@ function game.controls() -- Controls the object
 	end
 end
 
-function game.draw()
+function game.draw() -- Draws demo assets
 	love.graphics.setColor(204, 204, 204) -- Draw the walls
 	love.graphics.rectangle("fill", objects.ground.body:getX(), objects.ground.body:getY(), windowWidth, wallWidth)
 	love.graphics.rectangle("fill", objects.ceiling.body:getX(), objects.ceiling.body:getY(), windowWidth, wallWidth)
@@ -67,7 +67,9 @@ function game.draw()
 	end
 
 	love.graphics.setColor(150, 220, 170) -- Draw the square
-	love.graphics.rectangle("fill", objects.square.body:getX(), objects.square.body:getY(), 50, 50)
+--	love.graphics.rectangle("fill", objects.square.body:getX(), objects.square.body:getY(), 50, 50)
+  	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints())) -- Draw a polygon using the square coordinates
+  	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
 
 	if debug == 1 then -- Draw debug variables
 		love.graphics.print(projectName..tostring(version), 30, 30) -- Display version
@@ -87,7 +89,7 @@ function addBall() -- Adds a ball object
 	curBalls = curBalls + 1
 end
 
-function removeBalls()
+function removeBalls() -- Removes all ball objects
 	for b = #objects.ball, 1, -1 do
 		objects.ball[b].body:destroy()
 		table.remove(objects.ball, b)
@@ -95,11 +97,11 @@ function removeBalls()
 	curBalls = 1
 end
 
-function UPDATE_GAME(dt)
+function UPDATE_GAME(dt) -- Called by love.update constantly
 	world:update(dt)
 	game.controls()
 end
 
-function DRAW_GAME()
+function DRAW_GAME() -- Draws to the screen
 	game.draw()
 end
