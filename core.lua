@@ -44,9 +44,9 @@ end
 
 function game.controls() -- Controls the object
 	if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
-		objects.square.body:applyForce(0, -500)
+		objects.square.body:applyForce(0, -600)
 	elseif love.keyboard.isDown("s") or love.keyboard.isDown("down") then
-		objects.square.body:applyForce(0, 500)
+		objects.square.body:applyForce(0, 600)
 	elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
 		objects.square.body:applyForce(-500, 0)
 	elseif love.keyboard.isDown("d") or love.keyboard.isDown("right") then

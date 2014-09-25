@@ -33,22 +33,26 @@ function love.keypressed( key, unicode )
 end
 
 function love.keyreleased( key, unicode )
-	if key == "`" and debug == 0 then
+	if key == "`" or key == "/"and debug == 0 then -- Enable debug overlay
 		debug = 1
-	elseif key == "`" and debug == 1 then
+		print("Debug overlay enabled")
+	elseif key == "`" or key == "/" and debug == 1 then -- Disable debug overlay
 		debug = 0
+	 	print("Debug overlay disabled")
 	end
 
 	if key == "r" then
 		game.load()
+		print("Reloaded demo")
 	end
 end
 
 function love.mousepressed( x, y, button )
-	if button == "l" then
+	if button == "l" then -- Adds balls on left click
 		addBall()
-	else
+	else -- Removes balls on right click
 		removeBalls()
+		print("Cleaned all ball objects")
 	end
 end
 
