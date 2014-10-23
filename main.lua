@@ -11,17 +11,17 @@ Start of LOVE engine functions
 ]]
 
 function love.load()
-	game.load() -- Player loading
+	game.load() -- Game loading
 	love.graphics.setBackgroundColor(255, 255, 255)
 	print("Loaded "..tostring(projectName)..tostring(version))
 end
 
 function love.draw()
-	DRAW_GAME() -- Player drawing
+	DRAW_GAME() -- Game drawing
 end
 
 function love.update(dt)
-	UPDATE_GAME(dt) -- Player updating
+	UPDATE_GAME(dt) -- Game updating
 
 --	print()
 end
@@ -33,7 +33,7 @@ function love.keypressed( key, unicode )
 end
 
 function love.keyreleased( key, unicode )
-	if key == "`" or key == "/"and debug == 0 then -- Enable debug overlay
+	if key == "`" or key == "/" and debug == 0 then -- Enable debug overlay
 		debug = 1
 		print("Debug overlay enabled")
 	elseif key == "`" or key == "/" and debug == 1 then -- Disable debug overlay

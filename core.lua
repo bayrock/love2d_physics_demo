@@ -3,8 +3,6 @@ core.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-debug = 0
-
 game = {}
 
 function game.load() -- Loads or reloads the demo
@@ -42,7 +40,7 @@ function game.load() -- Loads or reloads the demo
 	objects.rightWall.fixture = love.physics.newFixture(objects.rightWall.body, objects.rightWall.shape)
 end
 
-function game.controls() -- Controls the object
+function game.controls() -- Controls the square object
 	if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
 		objects.square.body:applyForce(0, -600)
 	elseif love.keyboard.isDown("s") or love.keyboard.isDown("down") then
@@ -66,15 +64,14 @@ function game.draw() -- Draws demo assets
 		love.graphics.circle("fill", objects.ball[q].body:getX(), objects.ball[q].body:getY(), objects.ball[q].shape:getRadius())
 	end
 
-	love.graphics.setColor(150, 220, 170) -- Draw the square
---	love.graphics.rectangle("fill", objects.square.body:getX(), objects.square.body:getY(), 50, 50)
-  	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints())) -- Draw a polygon using the square coordinates
+	love.graphics.setColor(150, 220, 170) -- Draw the square polygon
+  	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
 
 	if debug == 1 then -- Draw debug variables
-		love.graphics.print(projectName..tostring(version), 30, 30) -- Display version
-		love.graphics.print("FPS: "..tostring(love.timer.getFPS( )),30, 45) -- Display FPS
-		love.graphics.print("Balls spawned: "..tostring(#objects.ball), 30, 60) -- Display number of ball objects on screen
+		love.graphics.print(projectName..version, 30, 30) -- Display version
+		love.graphics.print("FPS: "..love.timer.getFPS( ), 30, 45) -- Display FPS
+		love.graphics.print("Balls spawned: "..#objects.ball, 30, 60) -- Display number of ball objects on screen
 	end
 end
 

@@ -6,6 +6,8 @@ Author: Bayrock (http://Devinity.org)
 projectName = "Lua Physics Demo "
 version = "v0.6"
 
+debug = 0
+
 wallWidth = 25
 windowWidth = 800
 windowHeight = 600
@@ -14,7 +16,7 @@ windowHeightB = windowHeight - wallWidth
 function love.conf(t)
     t.version = "0.9.1"
     t.console = true
-    t.window.title = projectName ..tostring("- build: ")..tostring(version)
+    t.window.title = projectName .."- build: "..(version)
     t.window.icon = nil
     t.window.width = windowWidth
     t.window.height = windowHeight
