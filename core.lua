@@ -40,14 +40,15 @@ function game.load() -- Loads or reloads the demo
 	objects.rightWall.fixture = love.physics.newFixture(objects.rightWall.body, objects.rightWall.shape)
 end
 
+local keyDown = love.keyboard.isDown
 function game.controls() -- Controls the square object
-	if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+	if keyDown("w") or keyDown("up") then
 		objects.square.body:applyForce(0, -600)
-	elseif love.keyboard.isDown("s") or love.keyboard.isDown("down") then
+	elseif keyDown("s") or keyDown("down") then
 		objects.square.body:applyForce(0, 600)
-	elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+	elseif keyDown("a") or keyDown("left") then
 		objects.square.body:applyForce(-500, 0)
-	elseif love.keyboard.isDown("d") or love.keyboard.isDown("right") then
+	elseif keyDown("d") or keyDown("right") then
 		objects.square.body:applyForce(500, 0)
 	end
 end
@@ -68,7 +69,7 @@ function game.draw() -- Draws demo assets
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
 
-	if debug == 1 then -- Draw debug variables
+	if debug == true then -- Draw debug variables
 		love.graphics.print(projectName..version, 30, 30) -- Display version
 		love.graphics.print("FPS: "..love.timer.getFPS( ), 30, 45) -- Display FPS
 		love.graphics.print("Balls spawned: "..#objects.ball, 30, 60) -- Display number of ball objects on screen
