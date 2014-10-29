@@ -48,8 +48,8 @@ function love.keyreleased( key, unicode )
 end
 
 function love.mousepressed( x, y, button )
-	if button == "l" then -- Adds balls on left click
-		addBall()
+	if button == "l" then
+		mouse = true
 	else -- Removes balls on right click
 		removeBalls()
 		print("Cleaned all ball objects")
@@ -57,6 +57,11 @@ function love.mousepressed( x, y, button )
 end
 
 function love.mousereleased( x, y, button )
+	if button == "l" then -- Adds balls on left click
+		addBall()
+	end
+	mouse = false
+	ballSize = 20
 end
 
 function love.quit()

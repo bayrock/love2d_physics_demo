@@ -4,7 +4,7 @@ Author: Bayrock (http://Devinity.org)
 ]]
 
 projectName = "Lua Physics Demo "
-version = "v0.6"
+version = "v0.7"
 
 debug = false
 
@@ -12,6 +12,8 @@ wallWidth = 25
 windowWidth = 800
 windowHeight = 600
 windowHeightB = windowHeight - wallWidth
+
+ballSize = 20
 
 function love.conf(t)
     t.version = "0.9.1"

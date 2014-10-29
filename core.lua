@@ -11,6 +11,7 @@ function game.load() -- Loads or reloads the demo
 
 	objects = {}
 	objects.ball = {} -- Stores the ball objects
+  	objects.ballGhost = {}
 	curBalls = 1
 
 	objects.square = {} -- Loads the physic arguments for the square
@@ -65,6 +66,10 @@ function game.draw() -- Draws demo assets
 		love.graphics.circle("fill", objects.ball[q].body:getX(), objects.ball[q].body:getY(), objects.ball[q].shape:getRadius())
 	end
 
+	if mouse == true then 
+		love.graphics.circle("fill", objects.ballGhost.body:getX(), objects.ballGhost.body:getY(), objects.ballGhost.shape:getRadius())
+	end
+
 	love.graphics.setColor(150, 220, 170) -- Draw the square polygon
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
@@ -81,7 +86,7 @@ function addBall() -- Adds a ball object
 	objects.ball[curBalls] = {}
 
 	objects.ball[curBalls].body = love.physics.newBody(world, mX, mY, "dynamic")
-	objects.ball[curBalls].shape = love.physics.newCircleShape(20)
+	objects.ball[curBalls].shape = love.physics.newCircleShape(ballSize)
 	objects.ball[curBalls].fixture = love.physics.newFixture(objects.ball[curBalls].body, objects.ball[curBalls].shape, 1)
 	objects.ball[curBalls].fixture:setRestitution(0.9)
 	curBalls = curBalls + 1
@@ -95,7 +100,16 @@ function removeBalls() -- Removes all ball objects
 	curBalls = 1
 end
 
+function sizeTimer(dt) -- ballSize timer
+	local mX, mY = love.mouse.getPosition()
+  	objects.ballGhost.body = love.physics.newBody(world, mX, mY, "dynamic")
+  	objects.ballGhost.shape = love.physics.newCircleShape(ballSize)
+
+	ballSize = ballSize + 15 * dt
+end
+
 function UPDATE_GAME(dt) -- Called by love.update constantly
+	if mouse == true then sizeTimer(dt) end
 	world:update(dt)
 	game.controls()
 end
