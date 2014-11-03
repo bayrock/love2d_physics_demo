@@ -73,7 +73,7 @@ function game.draw() -- Draws demo assets
 	love.graphics.setColor(150, 220, 170) -- Draw the square polygon
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
 
-	if debug == true then -- Draw debug variables
+	if debug then -- Draw debug variables
 		love.graphics.print(projectName..version, 30, 30) -- Display version
 		love.graphics.print("FPS: "..love.timer.getFPS( ), 30, 45) -- Display FPS
 		love.graphics.print("Balls spawned: "..#objects.ball, 30, 60) -- Display number of ball objects on screen

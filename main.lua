@@ -33,10 +33,10 @@ function love.keypressed( key, unicode )
 end
 
 function love.keyreleased( key, unicode )
-	if key == "`" and debug == false or key == "/" and debug == false then
+	if key == "`" and not debug or key == "/" and not debug then
 		debug = true
 		print("Debug overlay enabled")
-	elseif key == "`" and debug == true or key == "/" and debug == true then
+	elseif key == "`" and debug or key == "/" and debug then
 		debug = false
 	 	print("Debug overlay disabled")
 	end
