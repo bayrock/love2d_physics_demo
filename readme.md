@@ -1,7 +1,7 @@
-Lua physics demo
+Löve2d  physics demo
 ===========
 
-A basic Lua physics demonstration utilizing the Love2D framework
+A basic physics demonstration utilizing Lua and the Love2D framework
 
 
 by: Bayrock

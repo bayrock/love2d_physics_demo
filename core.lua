@@ -72,7 +72,6 @@ function game.draw() -- Draws demo assets
 
 	love.graphics.setColor(150, 220, 170) -- Draw the square polygon
   	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
-  	love.graphics.polygon("fill", objects.square.body:getWorldPoints(objects.square.shape:getPoints()))
 
 	if debug == true then -- Draw debug variables
 		love.graphics.print(projectName..version, 30, 30) -- Display version
