@@ -1,17 +1,17 @@
 --[[
-core.lua
+demo.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
 game = {}
 
-function game.load() -- Loads or reloads the demo
+function game.Load() -- Loads or reloads the demo
 	love.physics.setMeter(64)
 	world = love.physics.newWorld(0, 9.81 * 64, true)
 
 	objects = {}
 	objects.ball = {} -- Stores the ball objects
-  	objects.ballGhost = {}
+  objects.ballGhost = {}
 	curBalls = 1
 
 	objects.square = {} -- Loads the physic arguments for the square
@@ -42,7 +42,7 @@ function game.load() -- Loads or reloads the demo
 end
 
 local keyDown = love.keyboard.isDown
-function game.controls() -- Controls the square object
+function game.Input() -- Controls the square object
 	if keyDown("w") or keyDown("up") then
 		objects.square.body:applyForce(0, -600)
 	elseif keyDown("s") or keyDown("down") then
@@ -54,7 +54,7 @@ function game.controls() -- Controls the square object
 	end
 end
 
-function game.draw() -- Draws demo assets
+function game.Draw() -- Draws demo assets
 	love.graphics.setColor(204, 204, 204) -- Draw the walls
 	love.graphics.rectangle("fill", objects.ground.body:getX(), objects.ground.body:getY(), windowWidth, wallWidth)
 	love.graphics.rectangle("fill", objects.ceiling.body:getX(), objects.ceiling.body:getY(), windowWidth, wallWidth)
@@ -66,7 +66,7 @@ function game.draw() -- Draws demo assets
 		love.graphics.circle("fill", objects.ball[q].body:getX(), objects.ball[q].body:getY(), objects.ball[q].shape:getRadius())
 	end
 
-	if mouse == true then 
+	if mouse == true then
 		love.graphics.circle("fill", objects.ballGhost.body:getX(), objects.ballGhost.body:getY(), objects.ballGhost.shape:getRadius())
 	end
 
@@ -110,9 +110,9 @@ end
 function UPDATE_GAME(dt) -- Called by love.update constantly
 	if mouse == true then sizeTimer(dt) end
 	world:update(dt)
-	game.controls()
+	game.Input()
 end
 
 function DRAW_GAME() -- Draws to the screen
-	game.draw()
+	game.Draw()
 end

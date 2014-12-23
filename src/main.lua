@@ -3,15 +3,11 @@ main.lua
 Author: Bayrock (http://Devinity.org)
 ]]
 
-require("core")
+require("demo")
 require("conf")
 
---[[
-Start of LOVE engine functions
-]]
-
 function love.load()
-	game.load() -- Game loading
+	game.Load() -- Game loading
 	love.graphics.setBackgroundColor(255, 255, 255)
 	print("Loaded "..projectName..version)
 end
@@ -22,14 +18,6 @@ end
 
 function love.update(dt)
 	UPDATE_GAME(dt) -- Game updating
-
---	print()
-end
-
-function love.focus(bool)
-end
-
-function love.keypressed( key, unicode )
 end
 
 function love.keyreleased( key, unicode )
@@ -42,7 +30,7 @@ function love.keyreleased( key, unicode )
 	end
 
 	if key == "r" then
-		game.load()
+		game.Load()
 		print("Reloaded demo")
 	end
 end
@@ -66,4 +54,4 @@ end
 
 function love.quit()
 	print("Exiting...")
-end -- end of LOVE functions
+end
