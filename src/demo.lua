@@ -11,7 +11,7 @@ function game.Load() -- Loads or reloads the demo
 
 	objects = {}
 	objects.ball = {} -- Stores the ball objects
-  objects.ballGhost = {}
+	objects.ballGhost = {}
 	curBalls = 1
 
 	objects.square = {} -- Loads the physic arguments for the square
